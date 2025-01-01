@@ -5,3 +5,14 @@ steps:
   # Push the container image into AR
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:${COMMIT_SHA}']
+  # Create release in Google Cloud Deploy
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      [
+        "deploy", "releases", "create", "rel-${SHORT_SHA}",
+        "--delivery-pipeline", "demo-btykkrf",
+        "--region", "us-central1",
+        "--annotations", "commitId=${REVISION_ID}",
+        "--images", "IMAGE_NAME=us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:${COMMIT_SHA}"
+      ]
