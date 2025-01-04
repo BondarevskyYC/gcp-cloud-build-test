@@ -1,9 +1,9 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: demo-pipeline-demo-btykkrf-target-1
+  name: demo-clouddeploy-cloudrun
 spec:
   template:
     spec:
       containers:
-      - image: image
+      - image: us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$SHORT_SHA
