@@ -15,14 +15,12 @@ steps:
     '--region=us-central1']
   - name: 'gcr.io/cloud-builders/gcloud'
     id: "deploy releases"
-    entrypoint: gcloud
     args:
       [
-        "deploy", "releases", "create", "rel-${SHORT_SHA}",
-        "--delivery-pipeline", "demo-btykkrf",
-        "--region", "us-central1",
-        "--annotations", "commitId=${REVISION_ID}",
-        "--images", "IMAGE_NAME=us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA"
+        "deploy", "releases", "create", "rel-$SHORT_SHA",
+        "--delivery-pipeline=demo-pipeline",
+        "--region=us-central1",
+        "--images", "image1=us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$SHORT_SHA"
       ]
 # Add logging field to specify logging option
 options:
