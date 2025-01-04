@@ -1,21 +1,15 @@
 steps:
   # Build and tag using commit sha
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:${COMMIT_SHA}', '.', '-f', 'Dockerfile']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA}', '.', '-f', 'Dockerfile']
   # Push the container image into AR
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:${COMMIT_SHA}']
-  # Create release in Google Cloud Deploy
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    entrypoint: gcloud
-    args:
-      [
-        "deploy", "releases", "create", "rel-${SHORT_SHA}",
-        "--delivery-pipeline", "demo-btykkrf",
-        "--region", "us-central1",
-        "--annotations", "commitId=${REVISION_ID}",
-        "--images", "IMAGE_NAME=us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:${COMMIT_SHA}"
-      ]
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA']
+  # Deploy cloud run via gcloud CLI
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['run', 'deploy', 'demo-btykkrf-target-1' 
+    '--image us-central1-docker.pkg.dev/bondarevskiy1/my-docker-repo/my-image:$SHORT_SHA', 
+    '--region=us-central1']
 # Add logging field to specify logging option
 options:
   logging: CLOUD_LOGGING_ONLY
