@@ -1,11 +1,9 @@
 apiVersion: skaffold/v3
 kind: Config
-metadata:
-  name: my-app
-build:
-  artifacts:
-  - image: us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:${SHORT_SHA}
 deploy:
-  cloudrun:
-    region: us-central1
-    projectId: ${PROJECT_ID}
+  cloudrun: {}
+profiles:
+- name: demo-btykkrf-target-1
+  manifests:
+    rawYaml:
+    - demo-cloudrun-defition.yaml
