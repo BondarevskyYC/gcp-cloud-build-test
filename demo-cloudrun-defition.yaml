@@ -6,4 +6,4 @@ spec:
   template:
     spec:
       containers:
-      - image: us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$SHORT_SHA
+      - image: us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:${SHORT_SHA}
