@@ -20,6 +20,7 @@ steps:
         "deploy", "releases", "create", "rel-$SHORT_SHA",
         "--delivery-pipeline=demo-pipeline",
         "--region=us-central1",
+        "--skaffold-file=deploy/skaffold.yaml",
         "--images", "image1=us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$SHORT_SHA"
       ]
 # Add logging field to specify logging option
