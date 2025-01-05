@@ -3,7 +3,7 @@ kind: Config
 deploy:
   cloudrun: {}
 profiles:
-  - name: dev
+  - name: demo-btykkrf-target-1
     manifests:
       rawYaml:
       - cloudrun-dev.yaml
