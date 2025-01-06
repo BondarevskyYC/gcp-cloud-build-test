@@ -1,0 +1,40 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+ name: cloud-run-pipeline
+description: gcp cloud deploy pipeline with targets
+serialPipeline:
+ stages:
+ - targetId: target-dev
+   profiles: [dev-profile]
+ - targetId: target-qa
+   profiles: [qa-profile]
+ - targetId: target-prod
+   profiles: [prod-profile]
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: target-dev
+description: Cloud Run development service
+run:
+ location: projects/bondarevskiy1/locations/us-central1
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: target-qa
+description: Cloud Run qa service
+run:
+ location: projects/bondarevskiy1/locations/us-central1
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: target-prod
+description: Cloud Run prod service
+run:
+ location: projects/bondarevskiy1/locations/us-central1
