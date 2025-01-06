@@ -49,3 +49,18 @@ description: Cloud Run prod service
 requireApproval: true
 run:
  location: projects/bondarevskiy1/locations/us-central1
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Automation
+metadata:
+  name: my-automation-demo-app-1/advance
+description: advances a rollout
+suspended: false
+selector:
+  targets:
+  - id: target-prod
+rules:
+- advanceRolloutRule:
+    name: "advance-rollout"
+    sourcePhases: ["canary-25"]
+    wait: 1m
