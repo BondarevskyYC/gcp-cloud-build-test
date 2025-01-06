@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: app-prod
+  name: prod-app-definition
 spec:
   template:
     spec:
