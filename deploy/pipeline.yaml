@@ -36,5 +36,6 @@ kind: Target
 metadata:
  name: target-prod
 description: Cloud Run prod service
+requireApproval: true
 run:
  location: projects/bondarevskiy1/locations/us-central1
