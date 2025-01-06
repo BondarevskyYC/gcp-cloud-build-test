@@ -7,6 +7,10 @@ profiles:
     manifests:
       rawYaml:
       - cloudrun-dev.yaml
+  - name: qa-profile
+    manifests:
+      rawYaml:
+      - cloudrun-qa.yaml
   - name: prod-profile
     manifests:
       rawYaml:
