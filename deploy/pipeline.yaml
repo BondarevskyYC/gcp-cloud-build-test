@@ -55,10 +55,11 @@ apiVersion: deploy.cloud.google.com/v1
 kind: Automation
 metadata:
   name: my-automation-demo-app-1/promote
-description: Promotes a release to the next target
+description: Promotes a release to the next target (dev->qa->prod)
 suspended: false
 selector:
   targets:
+  - id: target-dev
   - id: target-qa
 rules:
 - promoteReleaseRule:
