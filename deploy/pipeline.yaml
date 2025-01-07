@@ -57,6 +57,7 @@ metadata:
   name: cloud-run-pipeline/promote
 description: Promotes a release to the next target (dev->qa->prod)
 suspended: false
+serviceAccount: 703996911921-compute@developer.gserviceaccount.com # Required!!!
 selector:
   targets:
   - id: target-dev
@@ -72,6 +73,7 @@ kind: Automation
 metadata:
   name: cloud-run-pipeline/advance
 description: advances a rollout
+serviceAccount: 703996911921-compute@developer.gserviceaccount.com # Required!!!
 suspended: false
 selector:
   targets:
