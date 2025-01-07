@@ -81,5 +81,5 @@ selector:
 rules:
 - advanceRolloutRule:
     name: "advance-rollout"
-    sourcePhases: ["canary-25"]
+    sourcePhases: ["canary-25"] # 25 percent
     wait: 1m
