@@ -1,21 +1,20 @@
+# Это GCP Cloud Build definition который вызывает GCP Cloud Deploy как последний шаг
+
+# Складываем build-артефакты из всех кубиков в GCP Artifact Registry      
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/bondarevsky-docker/my-image:$SHORT_SHA'
+  
+# Складываем build-логи в GCP Cloud Logs
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 steps:
   # Build and tag using commit sha
   - name: 'gcr.io/cloud-builders/docker'
     id: "docker build"
     args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/bondarevsky-docker/my-image:$SHORT_SHA', '.', '-f', 'Dockerfile']
   
-  # Push the container image into AR
-  #- name: 'gcr.io/cloud-builders/docker'
-  #  id: "docker push"
-  #  args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA']
-  # Deploy cloud run via gcloud CLI
-  #- name: 'gcr.io/cloud-builders/gcloud'
-  #  id: "run deploy"
-  #  args: ['run', 'deploy', 'demo-btykkrf-target-1', 
-  #  '--image=us-central1-docker.pkg.dev/bondarevskiy1/my-docker-repo/my-image:$SHORT_SHA', 
-  #  '--region=us-central1']
-
-# Deploy via Cloud Deploy
+# Invoke deploy via Cloud Deploy
   - id: "deploy releases"
     name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -26,9 +25,4 @@ steps:
         "--skaffold-file=deploy/skaffold.yaml",
         "--images", "image1=us-central1-docker.pkg.dev/$PROJECT_ID/bondarevsky-docker/my-image:$SHORT_SHA"
       ]
-images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/bondarevsky-docker/my-image:$SHORT_SHA'
-  
-# Add logging field to specify logging option
-options:
-  logging: CLOUD_LOGGING_ONLY
+
