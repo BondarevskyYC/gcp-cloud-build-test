@@ -1,4 +1,4 @@
-# Это GCP Cloud Build definition который вызывает GCP Cloud Deploy как последний шаг
+# Это GCP Cloud Build definition который вызывает GCP Cloud Deploy как последний шагdsasf
 
 # Складываем build-артефакты из всех кубиков в GCP Artifact Registry      
 images:
