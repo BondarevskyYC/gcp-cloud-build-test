@@ -2,7 +2,8 @@ steps:
   # Build and tag using commit sha
   - name: 'gcr.io/cloud-builders/docker'
     id: "docker build"
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA', '.', '-f', 'Dockerfile']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/bondarevsky-docker/my-image:$SHORT_SHA', '.', '-f', 'Dockerfile']
+  
   # Push the container image into AR
   #- name: 'gcr.io/cloud-builders/docker'
   #  id: "docker push"
@@ -23,10 +24,10 @@ steps:
         "--delivery-pipeline=cloud-run-pipeline",
         "--region=us-central1",
         "--skaffold-file=deploy/skaffold.yaml",
-        "--images", "image1=us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$SHORT_SHA"
+        "--images", "image1=us-central1-docker.pkg.dev/$PROJECT_ID/bondarevsky-docker/my-image:$SHORT_SHA"
       ]
 # Add logging field to specify logging option
 images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/bondarevsky-docker/my-image:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
