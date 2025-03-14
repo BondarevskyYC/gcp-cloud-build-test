@@ -4,9 +4,9 @@ steps:
     id: "docker build"
     args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA', '.', '-f', 'Dockerfile']
   # Push the container image into AR
-  - name: 'gcr.io/cloud-builders/docker'
-    id: "docker push"
-    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA']
+  #- name: 'gcr.io/cloud-builders/docker'
+  #  id: "docker push"
+  #  args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/my-image:$SHORT_SHA']
   # Deploy cloud run via gcloud CLI
   #- name: 'gcr.io/cloud-builders/gcloud'
   #  id: "run deploy"
@@ -26,5 +26,7 @@ steps:
         "--images", "image1=us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$SHORT_SHA"
       ]
 # Add logging field to specify logging option
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
