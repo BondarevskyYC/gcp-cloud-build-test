@@ -10,10 +10,11 @@ images:
 #   - repository: 'https://LOCATION-python.pkg.dev/$PROJECT_ID/REPOSITORY'
 #      paths: ['dist/*']
 
-  
-# Складываем build-логи в GCP Cloud Logs
 options:
+  # Складываем build-логи в GCP Cloud Logs
   logging: CLOUD_LOGGING_ONLY
+  # Use higher CPU machines so the caching and build steps are faster.
+  #machineType: 'E2_HIGHCPU_32'
 
 steps:
   # Build and tag using commit sha
