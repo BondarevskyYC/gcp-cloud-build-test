@@ -17,7 +17,7 @@ steps:
   
 # Add logging field to specify logging option
 images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/bondarevsky-docker/my-image:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/bondarevsky-docker/my-image:$SHORT_SHA'
 
 options:
   logging: CLOUD_LOGGING_ONLY
